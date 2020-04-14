@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['TextMerge.py'],
-             pathex=['C:\\Users\\Jardet\\Desktop\\TextMerge'],
+             pathex=['C:\\Users\\Jardet\\Desktop\\TextMerger'],
              binaries=[],
              datas=[],
              hiddenimports=[],
