@@ -2,6 +2,7 @@ from tkinter import *
 import pyperclip
 
 count = 0
+all_text = []
 
 
 def set_input():
@@ -10,7 +11,7 @@ def set_input():
 
 
 def add():
-    global count
+    global count, all_text
     all_text.append(e1.get(1.0, END))
     e1.delete(1.0, END)
     count +=1
@@ -18,7 +19,7 @@ def add():
 
 
 def finnish():
-    global count
+    global count, all_text
     count = 0
     merged_list = []
     merged_text = ""
@@ -31,14 +32,16 @@ def finnish():
     e1.delete(1.0, END)
     e1.insert(END, merged_text)
     merged_text = ""
+    all_text = []
     count_label['text'] = "Add Count: " + str(count)
+
 
 def copy():
     copy_text = e1.get(1.0, END)
     pyperclip.copy(copy_text)
 
+
 if __name__ == "__main__":
-    all_text =[]
     master = Tk()
     upperFrame = Frame(master)
     upperFrame.pack()
