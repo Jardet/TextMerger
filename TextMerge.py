@@ -1,6 +1,8 @@
 from tkinter import *
 import pyperclip
-
+from docx import Document
+from docx.shared import Pt       #Helps to specify font size
+from docx.shared import RGBColor #Helps to specify font Color
 
 def restart():
     global count, all_text, count_label
@@ -45,21 +47,26 @@ def add():
 def finnish():
     global all_text
     merged_list = []
-    merged_text = ""
+    clear()
     for text in all_text:
         merged_list.append(list(filter(None, text.splitlines())))
     if check_equal(merged_list) == TRUE:
+        document = Document()
         for i in range(0, len(merged_list[0])):
             for j in range(0, len(merged_list)):
-                merged_text += merged_list[j][i]+"\n"
-            merged_text += "\n"
-        e1.delete(1.0, END)
-        e1.insert(END, merged_text)
+                p = document.add_heading(level=0)
+                wp = p.add_run(merged_list[j][i])
+                wp.font.size = Pt(15)
+                if j == 1:
+                    wp.font.color.rgb = RGBColor(255, 0, 0)
+                elif j == 3 :
+                    wp.font.color.rgb = RGBColor(0, 255, 0)
+            wp.add_break()
+        document.save('novel.docx')
         restart()
     else:
         restart()
         popup_msg("บรรทัดไม่เท่ากัน โปรดทำใหม่อีกครั้ง")
-
 
 
 def copy():
@@ -82,6 +89,9 @@ textLabel.pack(side=TOP)
 
 e1 = Text(lowerFrame, height=20, width=40)
 e1.pack()
+e1.tag_config('green', foreground="green")
+e1.tag_config('yellow', background = "yellow")
+
 clear_button = Button(lowerFrame, text="Clear", command=clear)
 clear_button.pack(side=LEFT)
 paste_button = Button(lowerFrame, text="Paste", command=set_input)
