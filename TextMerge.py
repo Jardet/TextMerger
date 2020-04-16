@@ -58,9 +58,7 @@ def finnish():
                 wp = p.add_run(merged_list[j][i])
                 wp.font.size = Pt(15)
                 if j == 1:
-                    wp.font.color.rgb = RGBColor(255, 0, 0)
-                elif j == 3 :
-                    wp.font.color.rgb = RGBColor(0, 255, 0)
+                    wp.font.color.rgb = RGBColor(139,69,19)
             wp.add_break()
         document.save('novel.docx')
         restart()
