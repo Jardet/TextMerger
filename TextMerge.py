@@ -4,6 +4,7 @@ from docx import Document
 from docx.shared import Pt       #Helps to specify font size
 from docx.shared import RGBColor #Helps to specify font Color
 
+
 def restart():
     global count, all_text, count_label
     count = 0
@@ -53,12 +54,16 @@ def finnish():
     if check_equal(merged_list) == TRUE:
         document = Document()
         for i in range(0, len(merged_list[0])):
+            p = document.add_paragraph()
+            p.line_spacing = 0.5
             for j in range(0, len(merged_list)):
-                p = document.add_heading(level=0)
                 wp = p.add_run(merged_list[j][i])
-                wp.font.size = Pt(15)
+                wp.font.size = Pt(13)
                 if j == 1:
-                    wp.font.color.rgb = RGBColor(139,69,19)
+                    wp.font.color.rgb = RGBColor(139, 69, 19)
+                else:
+                    wp.font.color.rgb = RGBColor(0, 0, 0)
+                wp.add_break()
             wp.add_break()
         document.save('novel.docx')
         restart()
